@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.qianbo.tasklist.data.Task;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -31,11 +34,19 @@ public class TaskControllerTest {
         this.base = new URL("http://localhost:" + port + "/");
     }
 
-    @Test
+    
     public void testTasks() throws Exception {
         ResponseEntity<String> response = template.getForEntity(base.toString() + "/tasks",
                 String.class);
         
         assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+    
+    @Test
+    public void testAddTask() throws Exception {
+    	Task newTask = new Task("REST-2", "test", 9, 1);
+    	ResponseEntity<String> response = template.postForEntity(base.toString() + "/tasks", newTask, String.class);
+    	assertEquals(response.getStatusCode(), HttpStatus.OK);
+    	assert(ObjectId.isValid(response.getBody()));
     }
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.lang.NonNull;
 
 @Document(collection = "tasks")
 public class Task {
@@ -12,13 +13,16 @@ public class Task {
 	public String id;
 
 	@Indexed(unique = true)
+	@NonNull
 	public String taskId;
 	public String description;
+	@NonNull
 	public Date createdOn;
 	public Date lastModifiedOn;
 	public Date dueOn;
 	public int priority;
 	public String owner;
+	@NonNull
 	public String creator;
 	public int effort;
 
