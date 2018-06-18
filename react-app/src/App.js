@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Main from './components/main';
+import Main from './components/Main';
 
 class App extends Component {
   render() {

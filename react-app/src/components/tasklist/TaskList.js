@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import axios from 'axios';
 import TaskItem from './TaskItem';
-import Table from 'react-bootstrap/lib/Table';
+import {Table, Button} from 'react-bootstrap/lib';
 
 class TaskList extends Component {
     constructor(props){
@@ -26,6 +26,7 @@ class TaskList extends Component {
         });
     
         return (
+            <div>
             <Table>
                 <thead>
                     <tr>
@@ -33,12 +34,15 @@ class TaskList extends Component {
                         <th>Task Name</th>
                         <th>Priority</th>
                         <th>Due Date</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {taskItems}
                 </tbody>
             </Table>
+            <Button type="link"  bsStyle="primary"  href="/newtask" sm={2}>New</Button>
+            </div>
         );
     }
 }

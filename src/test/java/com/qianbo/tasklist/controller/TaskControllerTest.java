@@ -44,7 +44,7 @@ public class TaskControllerTest {
     
     @Test
     public void testAddTask() throws Exception {
-    	Task newTask = new Task("REST-2", "test", 9, 1);
+    	Task newTask = new Task("REST-2", "Rest Test Task", "test", 9, 1);
     	ResponseEntity<String> response = template.postForEntity(base.toString() + "/tasks", newTask, String.class);
     	assertEquals(response.getStatusCode(), HttpStatus.OK);
     	assert(ObjectId.isValid(response.getBody()));
