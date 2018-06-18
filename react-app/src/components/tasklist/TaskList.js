@@ -35,13 +35,14 @@ class TaskList extends Component {
                         <th>Priority</th>
                         <th>Due Date</th>
                         <th>Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {taskItems}
                 </tbody>
             </Table>
-            <Button type="link"  bsStyle="primary"  href="/newtask" sm={2}>New</Button>
+            <Button type="button"  bsStyle="primary"  href="/newtask" sm={2}>Create Task</Button>
             </div>
         );
     }

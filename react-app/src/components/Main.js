@@ -10,6 +10,7 @@ class Main extends Component {
         <div>
         <Route exact path="/" component={TaskList} />
         <Route path="/newtask" component={TaskForm} />
+        <Route path="/tasks/:id" component={TaskForm} />
         </div>
       </Router>
     );
