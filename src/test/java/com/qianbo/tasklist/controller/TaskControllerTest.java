@@ -69,7 +69,7 @@ public class TaskControllerTest {
     @Test
     public void testGetTask() throws Exception {
     	ResponseEntity<Task> response = template.getForEntity(base.toString() + "/tasks/" + id, Task.class);
-    	assertEquals(response.getBody().id, id);
+    	assertEquals(response.getBody().getId(), id);
     }
 
     @Test

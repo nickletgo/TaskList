@@ -10,24 +10,24 @@ import org.springframework.lang.NonNull;
 @Document(collection = "tasks")
 public class Task {
 	@Id
-	public String id;
+	private String id;
 
 	@Indexed(unique = true)
 	@NonNull
-	public String taskId;
+	private String taskId;
+
 	@NonNull
-	public String taskName;
-	public String description;
+	private String taskName;
+	private String description;
 	@NonNull
-	public Date createdOn;
-	public Date lastModifiedOn;
-	public Date dueOn;
-	public int priority;
-	public String assignee;
+	private Date createdOn;
+	private int priority;
+	private String assignee;
 	@NonNull
-	public String creator;
-	public int effort;
-	public int status;
+	private String creator;
+	private int effort;
+	private int status;
+	private int rank;
 
 	public Task() {}
 
@@ -38,8 +38,8 @@ public class Task {
 		this.priority = priority;
 		this.effort = effort;
 		this.createdOn = new Date();
-		this.lastModifiedOn = this.createdOn;
 		this.status = 0;
+		this.setRank();
 	}
 
 	
@@ -49,14 +49,13 @@ public class Task {
 		this.taskId = taskId;
 		this.taskName = taskName;
 		this.description = description;
-		this.dueOn = dueOn;
 		this.priority = priority;
 		this.assignee = assignee;
 		this.creator = creator;
 		this.effort = effort;
 		this.createdOn = new Date();
-		this.lastModifiedOn = this.createdOn;
 		this.status = 0;
+		this.setRank();
 	}
 
 	public String getTaskId() {
@@ -75,28 +74,13 @@ public class Task {
 		this.description = description;
 	}
 
-	public Date getLastModifiedOn() {
-		return lastModifiedOn;
-	}
-
-	public void setLastModifiedOn(Date lastModifiedOn) {
-		this.lastModifiedOn = lastModifiedOn;
-	}
-
-	public Date getDueOn() {
-		return dueOn;
-	}
-
-	public void setDueOn(Date dueOn) {
-		this.dueOn = dueOn;
-	}
-
 	public int getPriority() {
 		return priority;
 	}
 
 	public void setPriority(int priority) {
 		this.priority = priority;
+		this.setRank();
 	}
 
 	public String getAssignee() {
@@ -113,6 +97,7 @@ public class Task {
 
 	public void setEffort(int effort) {
 		this.effort = effort;
+		this.setRank();
 	}
 	
 
@@ -131,11 +116,45 @@ public class Task {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
+	}
+	
+	public int setRank() {
+		return priority * 5 + effort/2;
+	}
+	
+	public int getRank(){
+		return rank;
+	}
 	@Override
 	public String toString() {
 		return "Task [taskId=" + taskId + ", description=" + description + ", createdOn=" + createdOn
-				+ ", lastModifiedOn=" + lastModifiedOn + ", dueOn=" + dueOn + ", priority=" + priority + ", assignee="
+				+ ", priority=" + priority + ", assignee="
 				+ assignee + ", creator=" + creator + ", effort=" + effort + "]";
 	}
 	

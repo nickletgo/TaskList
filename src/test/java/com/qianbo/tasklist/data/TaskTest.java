@@ -25,6 +25,6 @@ public class TaskTest {
 	public void testCreateTask() {
 		Task newTask = new Task("DataTask-1", "Data Test Task", "John Smith", 1, 2);
 		Task savedTask = repository.save(newTask);
-		assertThat(savedTask.id).isNotNull();
+		assertThat(savedTask.getId()).isNotNull();
 	}
 }

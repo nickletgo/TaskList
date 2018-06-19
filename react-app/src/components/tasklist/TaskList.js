@@ -15,13 +15,25 @@ class TaskList extends Component {
     }
 
     componentDidMount(){
+        
         axios.get(this.taskUrl).then((res) => {
             this.setState({tasks:res.data});
         });
     }
 
     render(){
-        const taskItems = this.state.tasks.map((task) => {
+        //Translate numbers to meaningful description
+        const statusDes = ['Open', 'In Progress', 'Closed'];
+        const priorityDes = ['High', 'Medium', 'Low'];
+        const taskItems = this.state.tasks.sort((t1, t2) => {
+            if(t1.status == t2.status) {
+                return t1.rank - t2.rank;
+            } else {
+                return t1.status - t2.status;
+            }
+        }).map((task) => {
+            task.status = statusDes[task.status || 0];
+            task.priority = priorityDes[task.priority < 3 ? task.priority : 2];
             return (<TaskItem task={task} key={task.id} />);
         });
     
@@ -33,7 +45,7 @@ class TaskList extends Component {
                         <th>Task ID</th>
                         <th>Task Name</th>
                         <th>Priority</th>
-                        <th>Due Date</th>
+                        <th>Estimate</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>

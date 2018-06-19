@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Form, FormGroup, ControlLabel, Col, FormControl, Button} from 'react-bootstrap/lib';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom';
+import DatePicker from 'react-date-picker';
 
 class TaskForm extends Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class TaskForm extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     componentDidMount(){
@@ -27,12 +28,16 @@ class TaskForm extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.apiUrl);
-        console.log(this.state.task);
         event.preventDefault();
         axios.post(this.apiUrl, this.state.task).then(() => {
             this.props.history.push('/');
         }); 
+    }
+
+    handleDateChange(date) {
+        var task = this.state.task;
+        task.dueOn = date;
+        this.setState({task : task});
     }
 
     handleChange(e) {
@@ -76,7 +81,11 @@ class TaskForm extends Component {
                     Priority
                     </Col>
                     <Col componentClass={ControlLabel} sm={10}>
-                    <FormControl type="text" name='priority' value={this.state.task.priority || ''} onChange={this.handleChange}/>
+                    <FormControl  align="left" name="priority" componentClass="select" value={this.state.task.priority} onChange={this.handleChange}>
+                            <option default value="0">High</option>
+                            <option value="1">Medium</option>
+                            <option value="2">Low</option>
+                        </FormControl>
                     </Col>
                 </FormGroup>
 
@@ -98,15 +107,45 @@ class TaskForm extends Component {
                     </Col>
                 </FormGroup>
 
-                <FormGroup controlId="dueDate">
-                    <Col componentClass={ControlLabel} sm={2}>
-                    Due on
-                    </Col>
-                    <Col componentClass={ControlLabel} sm={10}>
-                    <FormControl type="text" name='dueOn' value={this.state.task.dueOn || ''} onChange={this.handleChange}/>
-                    </Col>
-                </FormGroup>
-
+                { this.isUpdate ? 
+                    <FormGroup controlId="status">
+                        <Col componentClass={ControlLabel} sm={2}>
+                        Status
+                        </Col>
+                        <Col componentClass={ControlLabel} sm={10}>
+                        <FormControl  align="left" name="status" componentClass="select" value={this.state.task.status || 0} onChange={this.handleChange}>
+                            <option default value="0">Open</option>
+                            <option value="1">In Progress</option>
+                            <option value="2">Closed</option>
+                        </FormControl>
+                        </Col>
+                    </FormGroup> : null
+                }
+                { this.isUpdate ?
+                    <FormGroup controlId="createOn">
+                        <Col componentClass={ControlLabel} sm={2}>
+                        Created On
+                        </Col>
+                        <Col  align="left" componentClass={ControlLabel} sm={10}>
+                        <DatePicker
+                            name="createdOn"
+                            value={this.state.task.createdOn ? new Date(this.state.task.createdOn) : null}
+                            disabled
+                        />
+                        </Col>
+                    </FormGroup> : null
+                }
+                { this.isUpdate ? 
+                    <FormGroup controlId="creator">
+                        <Col componentClass={ControlLabel} sm={2}>
+                        Created By
+                        </Col>
+                        <Col align="left" componentClass={ControlLabel} sm={10}>
+                        {this.state.task.creator}
+                        </Col>
+                    </FormGroup> : null
+                }
+                
                 <FormGroup>
                     <Col componentClass={ControlLabel} smOffset={2}>
                     <Button type="submit" bsStyle="primary"  onClick={this.handleSubmit}>{this.isUpdate ? 'Update' : 'Create'}</Button>

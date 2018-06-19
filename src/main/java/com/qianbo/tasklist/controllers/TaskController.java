@@ -1,8 +1,11 @@
 package com.qianbo.tasklist.controllers;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +31,9 @@ public class TaskController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/tasks")
 	public String save(@RequestBody Task task) {
+		task.setCreatedOn(new Date());
 		Task newTask = repository.save(task);
-		return newTask.id;
+		return newTask.getId();
 	}
 	
 	@RequestMapping(method=RequestMethod.GET, value="/tasks/{id}")
@@ -47,7 +51,7 @@ public class TaskController {
 	@RequestMapping(method=RequestMethod.POST, value="/tasks/{id}")
 	public String update(@RequestBody Task task) {
 		Task theTask = repository.save(task);
-		return theTask.id;
+		return theTask.getId();
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/tasks/{id}")
