@@ -1,11 +1,10 @@
 package com.qianbo.tasklist.controllers;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qianbo.tasklist.data.AssigneeStatus;
 import com.qianbo.tasklist.data.Task;
 import com.qianbo.tasklist.data.TaskRepository;
+import com.qianbo.tasklist.data.TaskSummary;
 
 @RestController
 public class TaskController {
@@ -47,6 +48,13 @@ public class TaskController {
 		Task task = repository.findByTaskId(taskId);
 		return task;
 	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/tasks/assignee-status")
+	public List<TaskSummary> findByTaskId() {
+		List<AssigneeStatus> assigneeList = repository.aggregateTaskByAssignee();
+		return StatusTrackerProcessor.processAssignee(assigneeList);
+	}
+	
 	
 	@RequestMapping(method=RequestMethod.POST, value="/tasks/{id}")
 	public String update(@RequestBody Task task) {

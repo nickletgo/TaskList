@@ -26,7 +26,7 @@ class TaskList extends Component {
         const statusDes = ['Open', 'In Progress', 'Closed'];
         const priorityDes = ['High', 'Medium', 'Low'];
         const taskItems = this.state.tasks.sort((t1, t2) => {
-            if(t1.status == t2.status) {
+            if(t1.status === t2.status) {
                 return t1.rank - t2.rank;
             } else {
                 return t1.status - t2.status;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 const TaskItem = ({task}) => {
@@ -16,6 +17,17 @@ const TaskItem = ({task}) => {
                     }
             }}>View Details</Link></td>
     </tr>);
+};
+
+TaskItem.propTypes = {
+    task: PropTypes.shape({
+        taskId: PropTypes.string,
+        taskName: PropTypes.string,
+        priority: PropTypes.Number,
+        effort: PropTypes.Number,
+        status: PropTypes.Number,
+    }
+    )
 };
 
 export default TaskItem;

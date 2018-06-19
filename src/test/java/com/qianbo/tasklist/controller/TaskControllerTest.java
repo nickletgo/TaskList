@@ -80,7 +80,6 @@ public class TaskControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
     
-    
     //@Test
 //    public void testUpdateTask() throws Exception {
 //    	Task task = template.getForEntity(base.toString()+ "/task", responseType)
