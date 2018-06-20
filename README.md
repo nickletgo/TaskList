@@ -50,6 +50,10 @@ git clone https://github.com/nickletgo/replenisher-task-list.git
 ```
 gradlew.bat build
 ```
+** The MongoDB has to be running while you building the server project in order to get pass the test. If you want to build without the database, run:
+```
+./gradlew -x test
+```
 3. navigate into the react-app folder and install dependencies with
 ```
 npm install

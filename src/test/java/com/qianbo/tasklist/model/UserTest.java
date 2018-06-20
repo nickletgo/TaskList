@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class UserTest {
 		repository.deleteAll();
     }
 	
+	@Ignore
 	@Test
 	public void testCreateTask() {
 		User user = new User("John Smith");

@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class TaskTest {
 		repository.deleteAll();
     }
 	
+	@Ignore
 	@Test
 	public void testCreateTask() {
 		Task newTask = new Task("DataTask-1", "Data Test Task", "John Smith", 1, 2);
@@ -35,6 +37,7 @@ public class TaskTest {
 		assertThat(savedTask.getId()).isNotNull();
 	}
 	
+	@Ignore
 	@Test
 	public void testGetAssigneeStatus() {
 		List<AssigneeStatus> assigneeList = repository.aggregateTaskByAssignee();
