@@ -18,7 +18,7 @@ A replenisher task list
 - As an admin, I can create a task on anyone's behalf
 - As a user, I can view status of all tasks by assignee and status
 
-#Prerequisites
+# Prerequisites
 To successfully build and run this project, please make sure:
 1. npm is installed in your Operating System
 2. MongoDB is installed in your machine
@@ -29,14 +29,14 @@ Navigate to /src/main/resources folder and update application.properties with co
 ```
 spring.data.mongodb.host=localhost
 spring.data.mongodb.port=32768
-
+```
 ## Insert testing data into MongoDB
 For demonstration, please run the following script to insert initial testing data into Database.
 ```
 mongo --host <yourMongoDBHost>:<yourMongoDBPort> MongoInitData.js
 ```
 
-`# Installation
+# Installation
 1. Clone the project to your local file system.
 ```
 git clone https://github.com/nickletgo/replenisher-task-list.git
