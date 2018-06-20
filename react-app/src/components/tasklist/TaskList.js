@@ -29,7 +29,13 @@ class TaskList extends Component {
             if(t1.status === t2.status) {
                 return t1.rank - t2.rank;
             } else {
-                return t1.status - t2.status;
+                if(t1.status === 1){
+                    return -1;
+                } else if(t2.status === 1) {
+                    return 1;
+                } else {
+                    return t1.status - t2.status;
+                }
             }
         }).map((task) => {
             task.status = statusDes[task.status || 0];

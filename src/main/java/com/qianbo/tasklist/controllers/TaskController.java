@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qianbo.tasklist.data.AssigneeStatus;
-import com.qianbo.tasklist.data.Task;
-import com.qianbo.tasklist.data.TaskRepository;
-import com.qianbo.tasklist.data.TaskSummary;
+import com.qianbo.tasklist.model.AssigneeStatus;
+import com.qianbo.tasklist.model.Task;
+import com.qianbo.tasklist.model.TaskRepository;
+import com.qianbo.tasklist.model.TaskSummary;
 
 @RestController
 public class TaskController {

@@ -15,8 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.qianbo.tasklist.data.Task;
-import com.qianbo.tasklist.data.TaskRepository;
+import com.qianbo.tasklist.model.Task;
+import com.qianbo.tasklist.model.TaskRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -61,9 +61,6 @@ public class TaskControllerTest {
     	if(testTask != null) {
     		repository.delete(testTask);
     	}
-    	//TODO: Issue with getting response by task id.
-    	//ResponseEntity<Task> response = template.getForEntity(base.toString() + "/tasks/search?taskId=" + taskId, Task.class);
-    	//Task theTask = response.getBody();
     }
     
     @Test

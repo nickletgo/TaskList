@@ -6,14 +6,15 @@ import DatePicker from 'react-date-picker';
 class TaskForm extends Component {
     constructor(props) {
         super(props);
-        this.state = {task: {}};
-        this.isUpdate = this.props.location && this.props.location.state && this.props.location.state.update;
+        this.state = {task: {}, users: []};
+        this.isUpdate = props.location && props.location.state && props.location.state.update;
         if(this.isUpdate) {
-            this.id = this.props.match.params.id;
+            this.id = props.match.params.id;
             this.apiUrl = `/api/tasks/${this.id}`;
         } else{
-            this.apiUrl = '/api/tasks';
+            this.apiUrl = '/api/tasks';   
         }
+        this.userApiUrl = '/api/users';
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
@@ -23,6 +24,10 @@ class TaskForm extends Component {
         if(this.isUpdate) {
             axios.get(this.apiUrl).then((res) => {
                 this.setState({task:res.data});
+            });
+
+            axios.get(this.userApiUrl).then((res) => {
+                this.setState({users:res.data});
             });
         }
     }
@@ -40,12 +45,22 @@ class TaskForm extends Component {
         this.setState({task : task});
     }
 
+
     handleChange(e) {
         const target = e.target;
         var task = this.state.task;
         task[target.name] = target.value;
         this.setState({ task : task });
     }
+
+    createDropDownItems() {
+        let items = [];         
+        this.state.users.forEach((user) => {
+            items.push(<option key={user.name} value={user.name}>{user.name}</option>); 
+        });
+        return items;
+    }  
+
     render(){
         return(
             <Form horizontal>
@@ -103,7 +118,9 @@ class TaskForm extends Component {
                     Assign To
                     </Col>
                     <Col componentClass={ControlLabel} sm={10}>
-                    <FormControl type="text" name='assignee' value={this.state.task.assignee || ''} onChange={this.handleChange}/>
+                    <FormControl  align="left" name="assignee" componentClass="select" value={this.state.task.assignee || ''} onChange={this.handleChange}>
+                        {this.createDropDownItems()}
+                    </FormControl>
                     </Col>
                 </FormGroup>
 

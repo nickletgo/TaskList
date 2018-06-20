@@ -1,4 +1,4 @@
-package com.qianbo.tasklist.data;
+package com.qianbo.tasklist.model;
 
 
 public class AssigneeStatus {

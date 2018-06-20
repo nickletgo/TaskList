@@ -1,4 +1,4 @@
-package com.qianbo.tasklist.data;
+package com.qianbo.tasklist.model;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -12,6 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.qianbo.tasklist.controllers.StatusTrackerProcessor;
+import com.qianbo.tasklist.model.AssigneeStatus;
+import com.qianbo.tasklist.model.Task;
+import com.qianbo.tasklist.model.TaskSummary;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {SpringMongoConfiguration.class})
@@ -36,6 +39,6 @@ public class TaskTest {
 	public void testGetAssigneeStatus() {
 		List<AssigneeStatus> assigneeList = repository.aggregateTaskByAssignee();
 		List<TaskSummary> summary = StatusTrackerProcessor.processAssignee(assigneeList);
-		assertThat(summary.size()).isNotNull();
+		assertThat(summary.size()).isGreaterThan(0);
 	}
 }

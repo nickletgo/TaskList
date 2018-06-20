@@ -1,4 +1,4 @@
-package com.qianbo.tasklist.data;
+package com.qianbo.tasklist.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;

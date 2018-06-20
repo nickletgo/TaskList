@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.qianbo.tasklist.data.AssigneeStatus;
-import com.qianbo.tasklist.data.TaskSummary;
+import com.qianbo.tasklist.model.AssigneeStatus;
+import com.qianbo.tasklist.model.TaskSummary;
 
 public class StatusTrackerProcessor {
 	
