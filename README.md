@@ -10,10 +10,10 @@ A replenisher task list
 	* Task Name
 	* Description
 	* CreatedBy 
-	* AssignTo
+	* Assignee
 	* CreatedOn
-	* LastModifiedOn
-	* DueOn
 	* Priority
 	* Effort
+	* Rank
 - As an admin, I can create a task on anyone's behalf
+- As a user, I can view status of all tasks by assignee and status
